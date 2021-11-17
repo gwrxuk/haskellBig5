@@ -1,0 +1,19 @@
+parseData :: Handle -> PersonalInfo -> String ->PersonalInfo
+parseData inh info big5Type= do
+    ineof <- hIsEOF inh
+    if ineof
+        then return info
+    else do inputStr <- hGetLine inh
+            print inputStr
+            let x = checkData inputStr
+            let y = checkOverall inputStr
+            let yFirst = y !! 0
+            if length yFirst > 1
+                then do
+                    let info = itemUpdate personalInfo yFirst 
+                    let info = parseData inh info yFirst
+                    return info
+            else do 
+                let info = parseData inh info big5Type
+                return info
+            return info

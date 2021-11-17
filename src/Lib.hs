@@ -59,20 +59,10 @@ scores = Scores 1 facetScore
 
 personalInfo :: PersonalInfo
 personalInfo = PersonalInfo "Jung-Hua Liu" "gwrx2005@gmail.com" scores scores scores scores scores
-
-
-usersEncode :: [Scores] -> Object
-usersEncode = HM.unions . map (\(Object score) -> score) . map toJSON
-    
-
     
 checkData :: String ->[String]
 checkData x = do
     getAllTextMatches (x =~ ("[-a-zA-Z0-9 ]+"::String)) :: [String]
-
-checkOverall :: String ->[String]
-checkOverall x = do
-    getAllTextMatches (x =~ ("[A-Z0-9 +]+" :: String)) :: [String]
 
 castString :: [String] -> (String, Int)
 castString x = (x !! 0, read(x!!1)::Int)
